@@ -60,6 +60,11 @@ module.exports = function (config, windowParams) {
         var code = query.code;
         var error = query.error;
 
+        // Fix for twitch auth
+    	if(code && code.split('.').length === 3) {
+    		return;
+    	}
+
         if (error !== undefined) {
           reject(error);
           authWindow.removeAllListeners('closed');
