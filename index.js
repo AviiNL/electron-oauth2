@@ -56,7 +56,9 @@ module.exports = function (config, windowParams) {
         reject(new Error('window was closed by user'));
       });
 
-      function onCallback(url) {
+      function onCallback(url) {       
+        if(url.indexOf(config.redirectUri) === -1) return;
+
         var url_parts = nodeUrl.parse(url, true);
         var query = url_parts.query;
         var code = query.code;
